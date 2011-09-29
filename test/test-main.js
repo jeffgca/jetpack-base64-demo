@@ -1,32 +1,7 @@
 const main = require("main");
+const base64 = require("base64");
 
-exports.test_test_run = function(test) {
-  test.pass("Unit test running!");
-};
-
-exports.test_id = function(test) {
-  test.assert(require("self").id.length > 0);
-};
-
-exports.test_url = function(test) {
-  require("request").Request({
-    url: "http://www.mozilla.org/",
-    onComplete: function(response) {
-      test.assertEqual(response.statusText, "OK");
-      test.done();
-    }
-  }).get();
-  test.waitUntilDone(20000);
-};
-
-exports.test_open_tab = function(test) {
-  const tabs = require("tabs");
-  tabs.open({
-    url: "http://www.mozilla.org/",
-    onReady: function(tab) {
-      test.assertEqual(tab.url, "http://www.mozilla.org/");
-      test.done();
-    }
-  });
-  test.waitUntilDone(20000);
+exports.test_base64 = function(test) {
+    test.assertEqual(base64.encode("hello world"), "aGVsbG8gd29ybGQ=");
+    test.assertEqual(base64.decode("eWF5IGpldHBhY2sh"), "yay jetpack!");
 };
